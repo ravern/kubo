@@ -1,5 +1,5 @@
 # Kubo
-Lightweight command line package for Go.
+Lightweight package to write command line apps in Go.
 
 ## Aims
 To be (and remain) as **lightweight** as possible, while still providing
