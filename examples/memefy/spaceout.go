@@ -16,7 +16,26 @@ var spaceout = &kubo.Command{
 		{Name: "space"},
 	},
 	Run: func(ctx *kubo.Context) error {
-		fmt.Fprintln(ctx.Stdout(), "Spaceout")
+		text, err := ctx.Argument("text")
+		if err != nil {
+			return err
+		}
+
+		space, err := kubo.Int(ctx.Flag("space"))
+		if err != nil {
+			space = 1
+		}
+
+		var textRunes []rune
+		for _, r := range text {
+			textRunes = append(textRunes, r)
+			for i := 0; i < space; i++ {
+				textRunes = append(textRunes, ' ')
+			}
+		}
+
+		fmt.Fprintln(ctx.Stdout(), string(textRunes))
+
 		return nil
 	},
 }

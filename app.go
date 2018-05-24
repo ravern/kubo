@@ -25,10 +25,10 @@ func NewApp(root *Command) *App {
 
 // Run runs the app with the given arguments.
 func (a *App) Run(args []string) error {
-	args = args[1:]
-
 	cmd := a.Root
 	for {
+		tmpArgs := args[1:]
+
 		// Verify command arguments
 		for i, arg := range cmd.Arguments {
 			if arg.Multiple && i != len(cmd.Arguments)-1 {
@@ -45,8 +45,8 @@ func (a *App) Run(args []string) error {
 		}
 
 		// Parse all the flags in the raw arguments
-		for i := 0; i < len(args); i++ {
-			arg := args[i]
+		for i := 0; i < len(tmpArgs); i++ {
+			arg := tmpArgs[i]
 
 			name, ok := parseFlagName(arg)
 			if ok {
@@ -58,10 +58,10 @@ func (a *App) Run(args []string) error {
 				var value string
 				if flag.Bool {
 					value = fmt.Sprint(true)
-					args = append(args[:i], args[i+1:]...)
-				} else if i+1 < len(args) {
-					value = args[i+1]
-					args = append(args[:i], args[i+2:]...)
+					tmpArgs = append(tmpArgs[:i], tmpArgs[i+1:]...)
+				} else if i+1 < len(tmpArgs) {
+					value = tmpArgs[i+1]
+					tmpArgs = append(tmpArgs[:i], tmpArgs[i+2:]...)
 				} else {
 					return fmt.Errorf("no value found for flag: %s", name)
 				}
@@ -72,31 +72,32 @@ func (a *App) Run(args []string) error {
 		}
 
 		// Parse as child command
-		if len(args) > 0 {
-			child, err := cmd.command(args[0])
+		if len(tmpArgs) > 0 {
+			child, err := cmd.command(tmpArgs[0])
 			if err == nil {
 				cmd = child
+				args = args[1:]
 				continue
 			}
 		}
 
 		// Parse as arguments
 		for _, arg := range cmd.Arguments {
-			if len(args) == 0 {
+			if len(tmpArgs) == 0 {
 				return fmt.Errorf("argument not found: %s", arg.Name)
 			}
 
 			if arg.Multiple {
 				ctx.argumentMultipleName = arg.Name
-				ctx.argumentMultipleValue = args
-				args = nil
+				ctx.argumentMultipleValue = tmpArgs
+				tmpArgs = nil
 				break
 			}
 
-			ctx.arguments[arg.Name] = args[0]
-			args = args[1:]
+			ctx.arguments[arg.Name] = tmpArgs[0]
+			tmpArgs = tmpArgs[1:]
 		}
-		if len(args) > 0 {
+		if len(tmpArgs) > 0 {
 			return fmt.Errorf("extra arguments supplied")
 		}
 

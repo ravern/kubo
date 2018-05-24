@@ -16,8 +16,8 @@ var root = &kubo.Command{
 }
 
 func main() {
-	root.AddCommand(alternating)
-	root.AddCommand(spaceout)
+	root.Add(alternating)
+	root.Add(spaceout)
 
 	if err := kubo.NewApp(root).Run(os.Args); err != nil {
 		fmt.Printf("error: %v\n", err)

@@ -41,7 +41,7 @@ func (ctx *Context) ArgumentMultiple(name string) ([]string, error) {
 func (ctx *Context) Flag(name string) (string, error) {
 	arg, ok := ctx.flags[name]
 	if !ok {
-		return "", fmt.Errorf("argument not found: %s", name)
+		return "", fmt.Errorf("flag not found: %s", name)
 	}
 	return arg, nil
 }
