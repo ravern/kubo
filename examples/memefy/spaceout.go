@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ravernkoh/kubo"
+	"github.com/ravernkoh/kubo/kuboutil"
 )
 
 var spaceout = &kubo.Command{
@@ -21,7 +22,7 @@ var spaceout = &kubo.Command{
 			return err
 		}
 
-		space, err := kubo.Int(ctx.Flag("space"))
+		space, err := kuboutil.Int(ctx.Flag("space"))
 		if err != nil {
 			space = 1
 		}
