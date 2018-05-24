@@ -14,7 +14,7 @@ var spaceout = &kubo.Command{
 		{Name: "text"},
 	},
 	Flags: []kubo.Flag{
-		{Name: "space"},
+		{Name: "space", Aliases: []string{"s"}},
 	},
 	Run: func(ctx *kubo.Context) error {
 		text, err := ctx.Argument("text")

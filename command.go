@@ -43,7 +43,7 @@ func (cmd *Command) command(nameOrAlias string) (*Command, error) {
 			}
 		}
 	}
-	return nil, fmt.Errorf("command not found: %s", nameOrAlias)
+	return nil, fmt.Errorf("command not defined: %s", nameOrAlias)
 }
 
 // flag returns the flag with the given name or alias.
@@ -58,5 +58,5 @@ func (cmd *Command) flag(nameOrAlias string) (Flag, error) {
 			}
 		}
 	}
-	return Flag{}, fmt.Errorf("flag not found: %s", nameOrAlias)
+	return Flag{}, fmt.Errorf("flag not defined: %s", nameOrAlias)
 }
