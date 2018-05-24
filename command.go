@@ -25,8 +25,8 @@ type Command struct {
 	children []*Command
 }
 
-// AddCommand adds a child command.
-func (cmd *Command) AddCommand(child *Command) {
+// Add adds a child command.
+func (cmd *Command) Add(child *Command) {
 	child.parent = cmd
 	cmd.children = append(cmd.children, child)
 }
