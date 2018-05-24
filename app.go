@@ -87,7 +87,8 @@ func (a *App) Run(args []string) error {
 			}
 
 			if arg.Multiple {
-				ctx.multiple = args
+				ctx.argumentMultipleName = arg.Name
+				ctx.argumentMultipleValue = args
 				args = nil
 				break
 			}
