@@ -8,13 +8,18 @@ import (
 )
 
 var spaceout = &kubo.Command{
-	Name:    "spaceout",
-	Aliases: []string{"spc"},
+	Name:        "spaceout",
+	Aliases:     []string{"spc"},
+	Description: "inserts spaces between characters",
 	Arguments: []kubo.Argument{
 		{Name: "text"},
 	},
 	Flags: []kubo.Flag{
-		{Name: "space", Aliases: []string{"s"}},
+		{
+			Name:        "space",
+			Aliases:     []string{"s"},
+			Description: "nunber of spaces between each character",
+		},
 	},
 	Run: func(ctx *kubo.Context) error {
 		text, err := ctx.Argument("text")

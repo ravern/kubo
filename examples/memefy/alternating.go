@@ -8,8 +8,9 @@ import (
 )
 
 var alternating = &kubo.Command{
-	Name:    "alternating",
-	Aliases: []string{"alt"},
+	Name:        "alternating",
+	Description: "alternates between upper and lower case",
+	Aliases:     []string{"alt"},
 	Arguments: []kubo.Argument{
 		{Name: "text"},
 	},
