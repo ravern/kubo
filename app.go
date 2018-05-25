@@ -57,11 +57,11 @@ func (a *App) Run(args []string) error {
 				// Try to find the flag definition
 				flag, err := cmd.flag(name)
 				if err != nil {
-					// Since it is not find, hold the flag
+					// Since it is not found, hold the flag
 					// not found error for later and simply
 					// let it parse as per normal
 					flagErr = err
-					flag.Bool = false
+					flag.Bool = true
 				}
 
 				var value string
@@ -81,6 +81,19 @@ func (a *App) Run(args []string) error {
 				if flagErr == nil {
 					ctx.flags[flag.Name] = value
 				}
+			}
+		}
+
+		// Set all flags with Bool to false if not set to true
+		for _, flag := range cmd.Flags {
+			if !flag.Bool {
+				continue
+			}
+
+			// Since flag is a bool flag and it is not set to true,
+			// set it to false
+			if _, err := ctx.Flag(flag.Name); err != nil {
+				ctx.flags[flag.Name] = "false"
 			}
 		}
 
