@@ -167,8 +167,14 @@ func (cmd *Command) fullName() string {
 func (cmd *Command) commandUsages() []string {
 	var usages []string
 	if len(cmd.Arguments) > 0 {
-		usage := fmt.Sprintf("<%s>", cmd.Arguments[0].Name)
+		var usage string
+		if cmd.Arguments[0].Multiple {
+			usage = fmt.Sprintf("<%s>...", cmd.Arguments[0].Name)
+		} else {
+			usage = fmt.Sprintf("<%s>", cmd.Arguments[0].Name)
+		}
 		for _, arg := range cmd.Arguments[1:] {
+			fmt.Println(arg)
 			if arg.Multiple {
 				usage = fmt.Sprintf("%s <%s>...", usage, arg.Name)
 			} else {
