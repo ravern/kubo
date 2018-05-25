@@ -97,9 +97,14 @@ func (a *App) Run(args []string) error {
 				}
 			} else {
 				// Set the command to the child and pop the first
-				// argument
+				// argument that matches the child command name
 				cmd = child
-				args = args[1:]
+				for i, arg := range args {
+					if arg == tmpArgs[0] {
+						args = append(append([]string{}, args[:i]...), args[i+1:]...)
+						break
+					}
+				}
 				continue
 			}
 		}
