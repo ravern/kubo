@@ -14,7 +14,7 @@ func Int(v string, err error) (int, error) {
 
 	i, err := strconv.Atoi(v)
 	if err != nil {
-		return 0, fmt.Errorf("could not convert %s to an int: %v", v, err)
+		return 0, fmt.Errorf("could not convert %s to an int", v)
 	}
 
 	return i, nil
@@ -29,7 +29,7 @@ func Float32(v string, err error) (float32, error) {
 
 	f, err := strconv.ParseFloat(v, 32)
 	if err != nil {
-		return 0, fmt.Errorf("could not convert %s to an float32: %v", v, err)
+		return 0, fmt.Errorf("could not convert %s to an float32", v)
 	}
 
 	return float32(f), nil
@@ -44,7 +44,7 @@ func Bool(v string, err error) (bool, error) {
 
 	b, err := strconv.ParseBool(v)
 	if err != nil {
-		return false, fmt.Errorf("could not convert %s to an bool: %v", v, err)
+		return false, fmt.Errorf("could not convert %s to an bool", v)
 	}
 
 	return b, nil
