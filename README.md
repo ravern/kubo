@@ -1,4 +1,5 @@
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/ravernkoh/kubo)
+[![GoReportCard](https://goreportcard.com/badge/ravernkoh/kubo)](https://goreportcard.com/report/ravernkoh/kubo)
 
 # Kubo
 Lightweight package to write command line apps in Go.

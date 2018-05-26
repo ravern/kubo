@@ -18,7 +18,7 @@ type Flag struct {
 	Bool bool
 }
 
-// nameAndAliases returns the name and aliases as a comma seperated string
+// nameAndAliases returns the name and aliases as a comma separated string
 func (flag *Flag) nameAndAliases() string {
 	names := []string{fmt.Sprintf("--%s", flag.Name)}
 	for _, alias := range flag.Aliases {

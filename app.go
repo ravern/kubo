@@ -77,7 +77,7 @@ func (a *App) Run(args []string) error {
 				i-- // decrement to keep index correct
 
 				// Don't set the flag in the context since it
-				// was not defined in the commmand
+				// was not defined in the command
 				if flagErr == nil {
 					ctx.flags[flag.Name] = value
 				}

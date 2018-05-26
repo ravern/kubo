@@ -188,7 +188,7 @@
 //  	return err
 //  }
 //
-// These conversion utilities automatically propogate the error from the `Argument`
+// These conversion utilities automatically propagate the error from the `Argument`
 // method.
 //
 // Child commands
