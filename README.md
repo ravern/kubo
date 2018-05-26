@@ -23,17 +23,48 @@ The most basic app has just one command, with no arguments and no flags.
 app := kubo.NewApp(&kubo.Command{
     Name: "basic",
     Description: "a basic hello world app",
+    Run: func(ctx *kubo.Context) error {
+        // Prints 'hello, world!'
+        fmt.Fprintln(ctx.Stdout(), "hello, world!")
+    },
 })
 ```
 
-`Run` then runs the app and returns an error which should be handled 
-(usually by simply printing it out).
+`Run` then runs the app and returns an error which should be handled (usually
+by simply printing it out).
 
 ```go
+// Blocks until the command is completed
 if err := app.Run(); err != nil {
     fmt.Printf("error: %v\n", err)
 }
 ```
+
+In this case, the app simply prints `"hello, world!"` (more will be explained on
+the context later).
+
+```bash
+$ basic
+hello, world!
+```
+
+### Commands
+The building block of a command line app is a command. Flags, arguments and child
+commands can all be defined on a command.
+
+```go
+kubo.Command{
+    Name: "commands",
+    Description: "a random command",
+    Run: func(ctx *kubo.Context) error {
+        // Prints 'random'
+        fmt.Fprintln(ctx.Stdout(), "random")
+    },
+}
+```
+
+The `Run` function is the function that will be called if the raw arguments are
+successfully parsed by the app. Usually, code will be written in this function.
 
 ### Flags
 Defining flags on a command is easy.
@@ -42,6 +73,7 @@ Defining flags on a command is easy.
 kubo.Command{
     Name: "flags",
     Description: "a command with flags",
+    // Defines the flags for this command
     Flags: []kubo.Flag{
         {
             Name: "one",
@@ -106,6 +138,7 @@ Defining arguments on a command is also easy.
 kubo.Command{
     Name: "arguments",
     Description: "a command with arguments",
+    // Defines the arguments for this command
     Arguments: []kubo.Argument{
         {
             Name: "one",
@@ -146,6 +179,63 @@ $ arguments value1 value2 value3 value4
 
 This will result in `two` having the value `["value2", "value3", "value4"]`.
 
+### Contexts
+The context passed in the run function is used to get the arguments and flags
+that were parsed from the raw arguments.
+
+```go
+kubo.Command{
+    Name: "contexts",
+    Description: "a command with arguments and flags",
+    Arguments: []kubo.Argument{
+        {Name: "argument"},
+    },
+    Flags: []kubo.Flag{
+        {Name: "flag"},
+    },
+    Run: func(ctx *kubo.Context) error {
+        // Gets the argument called 'argument'
+        argument, err := ctx.Argument("argument")
+        if err != nil {
+            return err
+        }
+
+        // Gets the flag called 'flag'
+        flag, err := ctx.Flag("flag")
+        if err != nil {
+            return err
+        }
+
+        fmt.Fprintf(ctx.Stdout(), "argument: %s, flag: %s\n", argument, flag)
+    },
+}
+```
+
+The context also contains the methods for `Stdin` and `Stdout`, which *should* be
+used to read from and write to the console. They can be configured in the app
+itself (which will pass these values to the context).
+
+```go
+// Default values
+app.Stdin = os.Stdin
+app.Stdout = os.Stdout
+```
+
+When getting arguments and flags from the context, sometimes their values need
+to be converted to other types. For that purpose, the `kuboutil` package can be
+used.
+
+```go
+// Gets the argument called 'argument' and converts it to an int
+argument, err := kuboutil.Int(ctx.Argument("argument"))
+if err != nil {
+    return err
+}
+```
+
+These conversion utilities automatically propogate the error from the `Argument`
+method.
+
 ### Child commands
 Commands can have child commands.
 
@@ -158,6 +248,7 @@ child := &kubo.Command{
     Name: "child",
 }
 
+// Makes 'child' a child of the 'parent' command
 parent.Add(child)
 ```
 
@@ -182,7 +273,10 @@ grandchild := &kubo.Command{
     Name: "grandchild",
 }
 
+// Makes 'grandchild' a child of the 'child' command
 child.Add(grandchild)
+
+// Makes 'child' a child of the 'parent' command
 parent.Add(child)
 ```
 
@@ -201,6 +295,7 @@ complex := &kubo.Command{
     Description: "some complex command",
 }
 
+// Makes 'help' a child command of the 'complex' command
 complex.Add(complex.Help())
 ```
 
