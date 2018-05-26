@@ -9,7 +9,7 @@ sufficient features to build rich command line applications. Also to be easy to
 **understand** and **use**.
 
 ## Installation
-For now, use `go get` (will move to `vgo` in a later commit).
+For now, use `go get` (will add support for `vgo` in a later update).
 ```bash
 $ go get github.com/ravernkoh/kubo
 ```
@@ -307,3 +307,19 @@ $ complex help
 
 ## Examples
 More examples can be found in the `_examples` folder.
+
+## Alternatives
+Of course, there are other more notable packages for building command line apps
+(Forgive me if I missed yours out).
+
++ [github.com/spf13/cobra](https://github.com/spf13/cobra)
++ [github.com/urfave/cli](https://github.com/urfave/cli)
+
+Kubo was built as some practice for me and also to contribute to open source
+software!
+
+## License
+This project is licensed under the GNU Public License 3.0.
+
+## Author
++ Ravern Koh ([ravernkoh@gmail.com](mailto://ravernkoh@gmail.com))
