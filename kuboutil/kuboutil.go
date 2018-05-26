@@ -5,8 +5,8 @@ import (
 	"strconv"
 )
 
-// Int returns the given error if it is not nil, or the given string as an int
-// and an error if it can't be converted.
+// Int returns the given string as an int and an error if it can't be converted
+// or if an error was given.
 func Int(v string, err error) (int, error) {
 	if err != nil {
 		return 0, err
@@ -20,8 +20,8 @@ func Int(v string, err error) (int, error) {
 	return i, nil
 }
 
-// Float32 returns the given error if it is not nil, or the given string as a
-// float32 and an error if it can't be converted.
+// Float32 returns the given string as a float32 and an error if it can't be
+// converted or if an error was given.
 func Float32(v string, err error) (float32, error) {
 	if err != nil {
 		return 0, err
@@ -35,8 +35,8 @@ func Float32(v string, err error) (float32, error) {
 	return float32(f), nil
 }
 
-// Bool returns the given error if it is not nil, or the given string as a bool
-// and an error if it can't be converted.
+// Bool returns the given string as an bool and an error if it can't be converted
+// or if an error was given.
 func Bool(v string, err error) (bool, error) {
 	if err != nil {
 		return false, err
