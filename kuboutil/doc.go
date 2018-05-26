@@ -10,7 +10,7 @@
 // However, this only returns the value as a string. In order to convert it
 // to other types, the strconv package must be used. However, due to ctx.Flag
 // having a second return value of error, the value must be converted in a
-// seperate statement, which is rather cumbersome.
+// separate statement, which is rather cumbersome.
 //
 // 	vStr, err := ctx.Flag("flag")
 // 	if err != nil {
