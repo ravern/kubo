@@ -87,7 +87,7 @@
 //  kubo.Flag{
 //  	Name: "two",
 //  	Description: "the second flag",
-//     Bool: true,
+//  	Bool: true,
 //  }
 //
 // The resulting value would be `"true"` if the flag is set and `"false"` if the
