@@ -10,9 +10,9 @@ sufficient features to build rich command line applications. Also to be easy to
 **understand** and **use**.
 
 ## Installation
-For now, use `go get` (will add support for `vgo` in a later update).
+Use `vgo get` to download the package.
 ```bash
-$ go get github.com/ravernkoh/kubo
+$ vgo get github.com/ravernkoh/kubo
 ```
 
 ## Usage
