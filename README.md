@@ -1,5 +1,6 @@
 [![GoDoc](https://godoc.org/github.com/ravernkoh/kubo?status.svg)](https://godoc.org/github.com/ravernkoh/kubo)
 [![GoReportCard](https://goreportcard.com/badge/ravernkoh/kubo)](https://goreportcard.com/report/ravernkoh/kubo)
+[![TravisCI](https://travis-ci.org/ravernkoh/kubo.svg?branch=master)](https://travis-ci.org/ravernkoh/kubo)
 
 # Kubo
 Lightweight package to write command line apps in Go.
