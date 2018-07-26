@@ -148,6 +148,14 @@ func (a *App) Run(args []string) error {
 			return fmt.Errorf("extra arguments supplied")
 		}
 
+		// If there is no run, but help is available, then set it to the
+		// help command
+		if cmd.Run == nil {
+			if helpCmd, err := cmd.command("help"); err == nil {
+				cmd.Run = helpCmd.Run
+			}
+		}
+
 		// Run the command
 		return cmd.Run(&ctx)
 	}
