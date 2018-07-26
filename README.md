@@ -1,17 +1,21 @@
+# Kubo
+
 [![GoDoc](https://godoc.org/github.com/ravernkoh/kubo?status.svg)](https://godoc.org/github.com/ravernkoh/kubo)
 [![GoReportCard](https://goreportcard.com/badge/ravernkoh/kubo)](https://goreportcard.com/report/ravernkoh/kubo)
 [![TravisCI](https://travis-ci.org/ravernkoh/kubo.svg?branch=master)](https://travis-ci.org/ravernkoh/kubo)
 
-# Kubo
 Lightweight package to write command line apps in Go.
 
 ## Aims
+
 To be (and remain) as **lightweight** as possible, while still providing
 sufficient features to build rich command line applications. Also to be easy to
 **understand** and **use**.
 
 ## Installation
+
 Use `vgo get` to download the package.
+
 ```bash
 $ vgo get github.com/ravernkoh/kubo
 ```
@@ -19,6 +23,7 @@ $ vgo get github.com/ravernkoh/kubo
 ## Usage
 
 ### Basic
+
 The most basic app has just one command, with no arguments and no flags.
 
 ```go
@@ -51,6 +56,7 @@ hello, world!
 ```
 
 ### Commands
+
 The building block of a command line app is a command. Flags, arguments and child
 commands can all be defined on a command.
 
@@ -69,6 +75,7 @@ The `Run` function is the function that will be called if the raw arguments are
 successfully parsed by the app. Usually, code will be written in this function.
 
 ### Flags
+
 Defining flags on a command is easy.
 
 ```go
@@ -126,14 +133,15 @@ kubo.Flag{
 The resulting value would be `"true"` if the flag is set and `"false"` if the
 flag is not set.
 
-*Note that once `Bool` is set, no value* should *be passed to the flag, as the
-parser will not try to parse for the flag value.*
+_Note that once `Bool` is set, no value_ should _be passed to the flag, as the
+parser will not try to parse for the flag value._
 
 ```bash
 $ flags -o value1 --two
 ```
 
 ### Arguments
+
 Defining arguments on a command is also easy.
 
 ```go
@@ -173,7 +181,7 @@ kubo.Argument{
 }
 ```
 
-*Note that only the last argument can have `Multiple` set.*
+_Note that only the last argument can have `Multiple` set._
 
 ```bash
 $ arguments value1 value2 value3 value4
@@ -182,6 +190,7 @@ $ arguments value1 value2 value3 value4
 This will result in `two` having the value `["value2", "value3", "value4"]`.
 
 ### Contexts
+
 The context passed in the run function is used to get the arguments and flags
 that were parsed from the raw arguments.
 
@@ -213,7 +222,7 @@ kubo.Command{
 }
 ```
 
-The context also contains the methods for `Stdin` and `Stdout`, which *should* be
+The context also contains the methods for `Stdin` and `Stdout`, which _should_ be
 used to read from and write to the console. They can be configured in the app
 itself (which will pass these values to the context).
 
@@ -239,6 +248,7 @@ These conversion utilities automatically propogate the error from the `Argument`
 method.
 
 ### Child commands
+
 Commands can have child commands.
 
 ```go
@@ -289,6 +299,7 @@ $ parent child grandchild
 ```
 
 ### Help command
+
 A help command can be generated for each command.
 
 ```go
@@ -308,20 +319,24 @@ $ complex help
 ```
 
 ## Examples
+
 More examples can be found in the `_examples` folder.
 
 ## Alternatives
+
 Of course, there are other more notable packages for building command line apps
 (Forgive me if I missed yours out).
 
-+ [github.com/spf13/cobra](https://github.com/spf13/cobra)
-+ [github.com/urfave/cli](https://github.com/urfave/cli)
+- [github.com/spf13/cobra](https://github.com/spf13/cobra)
+- [github.com/urfave/cli](https://github.com/urfave/cli)
 
 Kubo was built as some practice for me and also to contribute to open source
 software!
 
 ## License
+
 This project is licensed under the GNU Public License 3.0.
 
 ## Author
-+ Ravern Koh ([ravernkoh@gmail.com](mailto://ravernkoh@gmail.com))
+
+- Ravern Koh ([ravernkoh@gmail.com](mailto://ravernkoh@gmail.com))
