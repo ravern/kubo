@@ -8,9 +8,9 @@ Lightweight package to write command line apps in Go.
 
 ## Aims
 
-To be (and remain) as **lightweight** as possible, while still providing
+To be (and remain) as _lightweight_ as possible, while still providing
 sufficient features to build rich command line applications. Also to be easy to
-**understand** and **use**.
+_understand_ and _use_.
 
 ## Installation
 
